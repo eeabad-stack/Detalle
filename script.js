@@ -7,25 +7,53 @@ const letterText = document.getElementById("letterText");
 const photoDialog = document.getElementById("photoDialog");
 const photoMessage = document.getElementById("photoMessage");
 
-// Los navegadores suelen bloquear el autoplay con sonido.
-// Intenta iniciar la canción en la primera interacción de la usuaria.
-let musicStartedByGesture = false;
-async function startMusicOnFirstGesture() {
-  if (musicStartedByGesture) return;
-  musicStartedByGesture = true;
+// En móviles, el autoplay con sonido puede estar bloqueado por el navegador.
+// Se intenta al cargar la página y se vuelve a intentar en la primera interacción.
+// Este mismo elemento de audio se mantiene activo al cambiar de pantalla.
+let musicStarted = false;
+
+function updateMusicButton(playing) {
+  musicToggle.setAttribute("aria-pressed", playing ? "true" : "false");
+  musicLabel.textContent = playing ? "Pausar música" : "Activar música";
+}
+
+async function tryStartMusic() {
+  if (!music.paused) {
+    musicStarted = true;
+    updateMusicButton(true);
+    return true;
+  }
   try {
     await music.play();
-    musicToggle.setAttribute("aria-pressed", "true");
-    musicLabel.textContent = "Pausar música";
-  } catch {
-    musicToggle.setAttribute("aria-pressed", "false");
-    musicLabel.textContent = "Activar música";
+    musicStarted = true;
+    updateMusicButton(true);
+    return true;
+  } catch (error) {
+    updateMusicButton(false);
+    return false;
   }
-  document.removeEventListener("pointerdown", startMusicOnFirstGesture);
-  document.removeEventListener("keydown", startMusicOnFirstGesture);
 }
-document.addEventListener("pointerdown", startMusicOnFirstGesture, { once: true });
-document.addEventListener("keydown", startMusicOnFirstGesture, { once: true });
+
+// Intento automático al abrir. Si el navegador lo permite, sonará inmediatamente.
+music.loop = true;
+music.preload = "auto";
+window.addEventListener("load", () => {
+  tryStartMusic();
+});
+
+// En móviles suele ser necesario un primer toque. Escuchamos varias clases
+// de interacción para cubrir Safari/Chrome sin exigir que se pulse un botón concreto.
+function startMusicFromGesture() {
+  tryStartMusic();
+  document.removeEventListener("touchstart", startMusicFromGesture, true);
+  document.removeEventListener("pointerdown", startMusicFromGesture, true);
+  document.removeEventListener("click", startMusicFromGesture, true);
+  document.removeEventListener("keydown", startMusicFromGesture, true);
+}
+document.addEventListener("touchstart", startMusicFromGesture, { capture: true, passive: true });
+document.addEventListener("pointerdown", startMusicFromGesture, true);
+document.addEventListener("click", startMusicFromGesture, true);
+document.addEventListener("keydown", startMusicFromGesture, true);
 
 function showScreen(id) {
   screens.forEach((screen) => {
@@ -42,17 +70,11 @@ document.querySelectorAll("[data-go]").forEach((button) => {
 
 musicToggle.addEventListener("click", async () => {
   if (music.paused) {
-    try {
-      await music.play();
-      musicToggle.setAttribute("aria-pressed", "true");
-      musicLabel.textContent = "Pausar música";
-    } catch {
-      musicLabel.textContent = "Añade assets/audio/cancion.mp3";
-    }
+    const started = await tryStartMusic();
+    if (!started) musicLabel.textContent = "Toca para activar música";
   } else {
     music.pause();
-    musicToggle.setAttribute("aria-pressed", "false");
-    musicLabel.textContent = "Reproducir música";
+    updateMusicButton(false);
   }
 });
 

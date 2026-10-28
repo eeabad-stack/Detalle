@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160d2b">
+  <meta name="description" content="Un pequeño universo preparado con amor para celebrar nuestro primer mes.">
+  <title>Nuestro pequeño universo 💜</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="nebula nebula-one" aria-hidden="true"></div>
+  <div class="nebula nebula-two" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio">✦ nuestro universo</a>
+    <button id="musicToggle" class="music-toggle" type="button" aria-pressed="false">
+      <span aria-hidden="true">♫</span> <span id="musicLabel">Activar música</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="screen hero active" id="inicio" aria-labelledby="hero-title">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+      <p class="eyebrow">04/10/26❤️‍🩹 </p>
+      <div class="moon" aria-hidden="true">☾</div>
+      <h1 id="hero-title">Nuestro primer<br><span>mes</span></h1>
+      <p class="lead">Entre tantas estrellas, qué bonito coincidir contigo.</p>
+      <button class="primary-button" data-go="recuerdos" type="button">Abrir mi regalo <span>✦</span></button>
+      <p class="microcopy">Preparé esto pensando en ti, TE AMO ♡.</p>
+    </section>
+
+    <section class="screen" id="recuerdos" aria-labelledby="memories-title" hidden>
+      <p class="eyebrow">♡♡♡</p>
+      <h2 id="memories-title">TE AMO MI ,<br><span>CORAZÓN♡♡ </span></h2>
+      <p class="section-intro">Quiero guardar aquí estos pedacitos de nuestra historia. Y conforme pase el tiempo Dios nos permita sumar más recuerdos juntos.</p>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-photo="foto1.jpg" data-caption="TE AMO MI VIDA ♡.">
+          <img src="assets/fotos/foto1.jpg" alt="Una selfie juntos bajo los árboles por la noche">
+          <span class="photo-caption">Una noche, tú y yo ♡</span>
+        </button>
+        <button class="photo-card" type="button" data-photo="foto2.jpg" data-caption="TE AMO MI AMOR ♡ ">
+          <img src="assets/fotos/foto2.jpg" alt="Juntos con un ramo de flores en un lugar de madera">
+          <span class="photo-caption">One day ✿</span>
+        </button>
+        <button class="photo-card" type="button" data-photo="foto3.jpg" data-caption="TE AMO MI NIÑA ♡.">
+          <img src="assets/fotos/foto3.jpg" alt="Un momento divertido juntos mientras comen, con una camiseta amarilla">
+          <span class="photo-caption">♡♡♡</span>
+        </button>
+      </div>
+      <p class="hint">Toca una foto para descubrir su mensajito.</p>
+      <div class="nav-buttons">
+        <button class="secondary-button" data-go="inicio" type="button">Volver</button>
+        <button class="primary-button" data-go="carta" type="button">Seguir leyendo <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="screen letter-screen" id="carta" aria-labelledby="letter-title" hidden>
+      <p class="eyebrow">♡♡♡</p>
+      <h2 id="letter-title">Unas palabras<br><span>para ti</span></h2>
+      <button class="letter-envelope" id="openLetter" type="button" aria-expanded="false" aria-controls="letterText">
+        <span class="scroll-gift" aria-hidden="true">
+          <span class="scroll-roll scroll-roll-left"></span>
+          <span class="scroll-body"><span class="scroll-lines"></span></span>
+          <span class="scroll-roll scroll-roll-right"></span>
+          <span class="red-ribbon ribbon-vertical"></span>
+          <span class="red-ribbon ribbon-horizontal"></span>
+          <span class="ribbon-bow ribbon-bow-left"></span>
+          <span class="ribbon-bow ribbon-bow-right"></span>
+          <span class="ribbon-knot"></span>
+        </span>
+        <span id="envelopeLabel">Toca para desatar el lazo</span>
+      </button>
+      <article class="letter-paper" id="letterText" aria-hidden="true">
+        <p class="letter-greeting">Para mi Guabita♡,</p>
+        <p>Hoy cumplimos nuestro primer mes y quería regalarte algo que pudieras guardar, volver a abrir y recordar con una sonrisa. Tal vez un mes parezca poquito tiempo, pero para mí ha sido una oportunidad hermosa de conocerte, compartir contigo y descubrir nuevas razones para quererte.</p>
+        <p>Le doy gracias a Dios por permitir que nuestros caminos se encontraran, por tu vida y por cada momento que hemos podido compartir. Le pido que nos dé sabiduría, paciencia y un corazón dispuesto a cuidarnos, respetarnos y acompañarnos en los días bonitos y también en los difíciles.</p>
+        <p>No sé todo lo que nos espera, pero sí sé que quiero disfrutar cada etapa contigo, sin apresurar nuestra historia, que sea Dios el centro de nuestra relación y valorando cada pequeño detalle. Gracias por ser parte de mis días y por hacer que este primer capítulo tenga algo tan especial.</p>
+        <p class="letter-signoff">Feliz primer mes, mi amor.<br><span>TE AMO MUCHO MI GUABITA❤️❤️‍🩹</span><br><span>Que Dios cuide lo bonito que estamos construyendo.</span></p>
+        <p class="signature">Con mucho cariño, <span>Tu futuro Esposo</span> ♡</p>
+      </article>
+      <div class="nav-buttons">
+        <button class="secondary-button" data-go="recuerdos" type="button">Volver</button>
+        <button class="primary-button" data-go="final" type="button">Una última cosita <span>✦</span></button>
+      </div>
+    </section>
+
+    <section class="screen finale" id="final" aria-labelledby="final-title" hidden>
+      <div class="heart-stars" aria-hidden="true">♡</div>
+      <p class="eyebrow">♡♡♡</p>
+      <h2 id="final-title">Todo lo que hagan, háganlo con amor,<br><span>1 Corintios 16:14</span></h2>
+      <p class="final-message">Si pudiera pedir algo para este nuevo capítulo, sería que sigamos aprendiendo a querernos bonito, que nunca nos falten las conversaciones sinceras, las risas y las ganas de elegirnos.</p>
+      <p class="final-verse">“FELIZ PRIMER MES MI AMOR.”<br><small>TE AMO ♡</small></p>
+      <p class="closing">GRACIAS POR FORMAR PARTE DE MI VIDA. 💜</p>
+      <button class="secondary-button" data-go="inicio" type="button">Volver a empezar ↺</button>
+    </section>
+  </main>
+
+  <dialog id="photoDialog" class="photo-dialog">
+    <button class="dialog-close" id="closePhoto" type="button" aria-label="Cerrar">×</button>
+    <p id="photoMessage"></p>
+  </dialog>
+
+  <audio id="backgroundMusic" src="assets/audio/cancion.mp3" loop preload="none"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
